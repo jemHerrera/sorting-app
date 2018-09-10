@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Lato', sans-serif;
+    margin: 0 auto;
+    max-width: 1440px;
+
+
+
+
+
+
+
+
+/* ---------------------------------------------HEAD */
+
+}
+header{
+    display:flex;
+    justify-content:center;
+    background-color: #222222;
+}
+h1{
+    display: inline-block;
+    margin: 5%;
+    font-weight: 100;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 500%;
+}
+
+
+
+
+/* ---------------------------------------------MAIN SORTING CONTROL */
+#control{
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    background-color: rgb(244, 245, 249);
+}
+#buttons{
+    height: 42px;
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+#categories{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+#buttons button{
+    font-family: 'Lato', sans-serif;
+    background-color: #222222;
+    margin: 0.2em;
+    padding: 1em;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 300;
+    cursor: pointer;
+    border-radius:4px;
+    transition: all 300ms ease-in-out;
+    opacity: 0.9;
+}
+#buttons button:hover{
+    opacity:1;
+}
+#buttons button:focus{
+    outline: none;
+}
+#categories > div{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+#categories div p{
+    color: #909090;
+}
+#categories > div > div{
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    width: 500px;
+    margin: 1em;
+}
+#categories > div > div > button{
+    border: none;
+    color: #707070;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+}
+#categories > div > div >button:hover{
+    color: #505050;
+}
+#categories > div > div >button:focus{
+    outline: none;
+}
+
+
+
+/* ---------------------------------------------MAIN BODY */
+
+#items{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+}
+#items > div{
+    overflow: hidden;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+}
+#items > div > div{
+    position: absolute;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 300ms ease-in-out;
+}
+#items > div > div > a{
+    height: 100%;
+}
+#items > div > div:hover{
+    opacity: 1;
+}
+#items > div > div > h4{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40%;
+    background:  rgba(0,0,0, 0.95);
+    color: white;
+    font-size: 24px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
