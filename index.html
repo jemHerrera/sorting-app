@@ -22,39 +22,48 @@
                     <button @click="changeSorting('colorTheme')">Color Theme</button>
                 </div>
                 <div id="categories">
-                    <div v-if="sorting.topic" id="topic">
+                    <div :class="{drawer: sorting.topic}" id="topic">
                         <p>Sort By: Topic</p>
+                        <hr>
                         <div>
-                            <button>Health</button>
-                            <button>Food</button>
-                            <button>Business</button>
-                            <button>Science</button>
-                            <button>Geography</button>
+                            <button @click="applyFilter">Health</button>
+                            <button @click="applyFilter">Food</button>
+                            <button @click="applyFilter">Business</button>
+                            <button @click="applyFilter">Science</button>
+                            <button @click="applyFilter">Geography</button>
                         </div>
                     </div>
-                    <div v-if="sorting.type" id="type">
+                    <div :class="{drawer: sorting.type}" id="type">
                         <p>Sort By: Type</p>
+                        <hr>
                         <div>
-                            <button>Informational</button>
-                            <button>Statistical</button>
-                            <button>Timeline</button>
-                            <button>Process</button>
-                            <button>Comparison</button>
+                            <button @click="applyFilter">Informational</button>
+                            <button @click="applyFilter">Statistical</button>
+                            <button @click="applyFilter">Timeline</button>
+                            <button @click="applyFilter">Process</button>
+                            <button @click="applyFilter">Comparison</button>
                         </div>
                     </div>
-                    <div v-if="sorting.colorTheme" id="color-theme">
+                    <div :class="{drawer: sorting.colorTheme}" id="color-theme">
                         <p>Sort By: Color Theme</p>
+                        <hr>
                         <div>
-                            <button>Cool</button>
-                            <button>Warm</button>
-                            <button>Dark</button>
-                            <button>Light</button>
+                            <button @click="applyFilter">Cool</button>
+                            <button @click="applyFilter">Warm</button>
+                            <button @click="applyFilter">Dark</button>
+                            <button @click="applyFilter">Light</button>
                         </div>
+                    </div>
+                    <div id="reset-filter">
+                        <p>
+                            <span v-for="filter in appliedFilter"><i @click="removeFilter(filter)" class="fas fa-times"></i>{{filter}}</span>
+                        </p>
+                        <button @click="appliedFilter = []">Reset Filters</button>
                     </div>
                 </div>
             </div>
             <div id="items">
-                <div v-for="item in items">
+                <div v-for="item in displayedItems">
                     <div>
                         <a :href="item.link"><img :src="item.source"></a>
                         <h4>{{item.name}}</h1>
