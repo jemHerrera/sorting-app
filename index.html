@@ -16,15 +16,15 @@
         </header>
         <div id="app">
             <div id="control">
+                <input :class="{inputDrawer: searchActive}" type="text" placeholder="Search" v-model="search" v-on:keyUp = "applySearch">
                 <div id="buttons">
-                    <button @click="changeSorting('topic')">Topic</button>
-                    <button @click="changeSorting('type')">Type</button>
-                    <button @click="changeSorting('colorTheme')">Color Theme</button>
+                    <button :class="{searchClose: sorting.topic}" @click="changeSorting('topic')">Topic</button>
+                    <button :class="{searchClose: sorting.type}" @click="changeSorting('type')">Type</button>
+                    <button :class="{searchClose: sorting.colorTheme}" @click="changeSorting('colorTheme')">Color Theme</button>
+                    <button :class="{searchClose: searchActive}" class="searchButton" @click="searchActive = !searchActive"><i class="fas fa-search"></i></button>
                 </div>
                 <div id="categories">
                     <div :class="{drawer: sorting.topic}" id="topic">
-                        <p>Sort By: Topic</p>
-                        <hr>
                         <div>
                             <button @click="applyFilter">Health</button>
                             <button @click="applyFilter">Food</button>
@@ -34,8 +34,6 @@
                         </div>
                     </div>
                     <div :class="{drawer: sorting.type}" id="type">
-                        <p>Sort By: Type</p>
-                        <hr>
                         <div>
                             <button @click="applyFilter">Informational</button>
                             <button @click="applyFilter">Statistical</button>
@@ -45,8 +43,6 @@
                         </div>
                     </div>
                     <div :class="{drawer: sorting.colorTheme}" id="color-theme">
-                        <p>Sort By: Color Theme</p>
-                        <hr>
                         <div>
                             <button @click="applyFilter">Cool</button>
                             <button @click="applyFilter">Warm</button>
@@ -56,7 +52,7 @@
                     </div>
                     <div id="reset-filter">
                         <p>
-                            <span v-for="filter in appliedFilter"><i @click="removeFilter(filter)" class="fas fa-times"></i>{{filter}}</span>
+                            <span @click="removeFilter(filter)" v-for="filter in appliedFilter"><i class="fas fa-times"></i>{{filter}}</span>
                         </p>
                         <button @click="appliedFilter = []">Reset Filters</button>
                     </div>
