@@ -54,20 +54,31 @@
                         <p>
                             <span @click="removeFilter(filter)" v-for="filter in appliedFilter"><i class="fas fa-times"></i>{{filter}}</span>
                         </p>
-                        <button @click="appliedFilter = []">Reset Filters</button>
+                        <!-- <button v-if="appliedFilter != []" @click="appliedFilter = []">Reset Filters</button> -->
                     </div>
                 </div>
             </div>
             <div id="items">
-                <div v-for="item in displayedItems">
-                    <div>
-                        <a :href="item.link"><img :src="item.source"></a>
-                        <h4>{{item.name}}</h1>
+                <section>
+                    <!-- <button v-if="displayPrevious" @click="currentPage--">Previous</button> -->
+                    <button :class="{highlighted : currentPage == page}" v-for="page in pageAmount" @click="currentPage = page">{{page}}</button>
+                    <!-- <button v-if="displayNext" @click="currentPage++">Next</button> -->
+                </section>
+                <div v-for="(n, page) in pageAmount" v-if="page == currentPage-1">
+                    <div v-for="item in displayedItems[page]">
+                        <div>
+                            <a :href="item.link"><img :src="item.source[item.activeTheme]"></a>
+                            <div class="item-label">
+                                <h4>{{item.name}}</h4>
+                                <div class="item-colors">
+                                    <button @click="item.activeTheme = theme" :style="buttonColor(theme)" v-for="theme in item.theme"></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </body>
     <script src="app.js"></script>
 </html>

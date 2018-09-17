@@ -89,7 +89,7 @@ h1{
 .searchButton{
     border-radius: 50px !important;
     position: absolute;
-    left: 2em;
+    left: 35%;
 }
 .searchClose{
     background-color: #de0b0b !important;;
@@ -100,6 +100,7 @@ h1{
     justify-content: center;
     align-items: center;
     margin: 2em;
+    position: relative;
 }
 #buttons button{
     font-family: 'Lato', sans-serif;
@@ -131,7 +132,7 @@ h1{
     opacity: 0;
 }
 .drawer{
-    height: 100px !important;
+    height: 3em !important;
     opacity: 1 !important;
 }
 #categories div p{
@@ -165,6 +166,8 @@ h1{
     height: auto !important;
     font-size: 70%;
     opacity: 1 !important;
+    position: absolute;
+    bottom: -2em;
 }
 #reset-filter button{
     background: none;
@@ -188,19 +191,38 @@ h1{
 }
 
 /* ---------------------------------------------MAIN BODY */
-
 #items{
+    background-color: rgb(244, 245, 249);
+}
+#items section{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+    padding: 1.5em;
+}
+#items section button{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #707070;
+    margin: 1em;
+}
+.highlighted{
+    color: #de0b0b !important;
+    font-weight: bold;
+}
+#items > div{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 16px;
 }
-#items > div{
+#items > div > div{
     overflow: hidden;
     width: 100%;
     padding-top: 100%;
     position: relative;
 }
-#items > div > div{
+#items > div > div > div{
     position: absolute;
     opacity: 0.7;
     top: 0;
@@ -212,25 +234,41 @@ h1{
     align-items: center;
     transition: opacity 300ms ease-in-out;
 }
-#items > div > div > a{
+#items > div > div > div > a{
     height: 100%;
 }
-#items > div > div:hover{
+#items > div > div > div:hover{
     opacity: 1;
 }
-#items > div > div > h4{
+.item-label{
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 40%;
     background:  rgba(0,0,0, 0.95);
-    color: white;
-    font-size: 24px;
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.item-label > h4{
+    color: white;
+    font-size: 20px;
     font-weight: 100;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     text-align: center;
+    height: 50%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.item-colors{
+    height: 50%;
+}
+.item-colors button{
+    height: 2em;
+    width: 2em;
+    border-radius: 1em;
+    margin: 0 1em;
 }
