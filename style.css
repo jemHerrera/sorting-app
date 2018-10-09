@@ -168,6 +168,8 @@ h1{
     opacity: 1 !important;
     position: absolute;
     bottom: -2em;
+    flex-direction: row !important;
+    box-sizing: border-box;
 }
 #reset-filter button{
     background: none;
@@ -177,17 +179,27 @@ h1{
 #reset-filter button:hover{
     color: #707070;
 }
+#reset-filter p{
+    border: 1px solid #de0b0b;
+    border-radius: 5px;
+    margin: 0 1em;
+}
+#reset-filter p:empty{
+    border: none;
+}
 #reset-filter span{
     color: #de0b0b;
     padding: 0.5em;
     cursor: pointer;
     margin: 0.25em 0;
+    
 }
 .fa-times{
     color: #de0b0b;
     font-size: 80%;
     cursor: pointer;
     margin: 1em 0.5em;
+    pointer-events:none;
 }
 
 /* ---------------------------------------------MAIN BODY */

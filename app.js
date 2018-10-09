@@ -210,7 +210,11 @@ new Vue({
         },
         currentPage : 1,
         searchActive: false,
-        appliedFilter: [],
+        appliedFilter: {
+            "type": [],
+            "color-theme": [],
+            "topic": []
+        },
         search: "",
     },
     mounted(){
@@ -218,22 +222,44 @@ new Vue({
         this.filteredItems = this.items;
         this.dividePages();
     },
+    // IF FILTER CHANGES, CHANGE THE DOM ACCORDINGLY
     watch:{
-        // IF FILTER CHANGES, CHANGE THE DOM ACCORDINGLY
-        appliedFilter: function(){
-            this.filteredItems = this.items.filter(item => {
-                let tags = item.topic.concat(item.type, item.theme);
-                let counter = 0;
-                for(let filter of this.appliedFilter){
-                    if(tags.includes(filter)) counter++;
-                    if(item.theme.includes(filter)){
-                        item.activeTheme = filter;
+        appliedFilter : {
+            handler(val){
+                this.filteredItems = this.items.filter(item => {
+                    let colorCounter = 0, typeCounter = 0, topicCounter = 0;
+                    if(this.appliedFilter["color-theme"].length > 0){
+                        for (let colorFilter of this.appliedFilter["color-theme"]){
+                            if(item.theme.includes(colorFilter)){
+                                item.activeTheme = colorFilter;
+                                colorCounter++;
+                            } 
+                        }
                     }
-                }
-                return (counter == this.appliedFilter.length && item.name.toLowerCase().match(this.search.toLowerCase()));
-            });
-            this.dividePages();
-            this.currentPage = 1;
+                    else colorCounter++;
+                    if(this.appliedFilter["type"].length > 0){
+                        for (let typeFilter of this.appliedFilter["type"]){
+                            if(item.type.includes(typeFilter)){
+                                typeCounter++;
+                            }
+                        }
+                    }
+                    else typeCounter++;
+                    if(this.appliedFilter["topic"].length > 0){
+                        for (let topicFilter of this.appliedFilter["topic"]){
+                            if(item.topic.includes(topicFilter)){
+                                topicCounter++;
+                            }
+                        }
+                    }
+                    else topicCounter++;
+                    // console.log([colorCounter, typeCounter, topicCounter])
+                    return(colorCounter > 0 && typeCounter > 0 && topicCounter > 0 && item.name.toLowerCase().match(this.search.toLowerCase()));
+                });
+                this.dividePages();
+                this.currentPage = 1;
+            },
+            deep: true
         }
     },
     computed:{
@@ -265,20 +291,30 @@ new Vue({
                 setTimeout(function(){
                     vm.sorting[type] = true;
                 }, 300)
-            } 
+            }
         },
         // REMOVE FILTER FROM FILTER ARRAY
         removeFilter: function(filter){
-            this.appliedFilter.splice(this.appliedFilter.indexOf(filter), 1);
+            let filterType = event.target.attributes.filtertype.nodeValue;
+            this.appliedFilter[filterType].splice(this.appliedFilter[filterType].indexOf(filter), 1);
         },
         // ADD FILTER TO FILTER ARRAY
         applyFilter: function(event){
-            if(this.appliedFilter.indexOf(event.target.textContent) == -1)this.appliedFilter.push(event.target.textContent);
+            let category =  event.target.parentElement.parentElement.id;
+            for(let key of Object.keys(this.appliedFilter)){
+                if(key == category && this.appliedFilter[key].indexOf(event.target.textContent) == -1){
+                    this.appliedFilter[category].push(event.target.textContent)
+                }
+            }
         },
         // FILTER ITEMS BASED ON SEARCH
         applySearch: function(){
-            this.appliedFilter = [];
-            console.log(this.search);
+            this.appliedFilter = {
+                "type": [],
+                "color-theme": [],
+                "topic": []
+            };
+            // console.log(this.search);
             this.filteredItems = this.items.filter((item) => {
                 return item.name.toLowerCase().match(this.search.toLowerCase());
             });

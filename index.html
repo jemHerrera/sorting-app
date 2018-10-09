@@ -51,10 +51,9 @@
                         </div>
                     </div>
                     <div id="reset-filter">
-                        <p>
-                            <span @click="removeFilter(filter)" v-for="filter in appliedFilter"><i class="fas fa-times"></i>{{filter}}</span>
-                        </p>
-                        <!-- <button v-if="appliedFilter != []" @click="appliedFilter = []">Reset Filters</button> -->
+                        <p><span filterType="topic" @click="removeFilter(filter)" v-for="filter in appliedFilter.topic"><i class="fas fa-times"></i>{{filter}}</span></p>
+                        <p><span filterType="type" @click="removeFilter(filter)" v-for="filter in appliedFilter.type"><i class="fas fa-times"></i>{{filter}}</span></p>
+                        <p><span filterType="color-theme" @click="removeFilter(filter)" v-for="filter in appliedFilter['color-theme']"><i class="fas fa-times"></i>{{filter}}</span></p>
                     </div>
                 </div>
             </div>
